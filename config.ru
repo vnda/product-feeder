@@ -7,6 +7,4 @@ if(ENV["NEW_RELIC"] == 1)
   require "new_relic/agent/instrumentation"
 end
 
-map "/google_merchant" do
-  run Feeder
-end
+run Feeder
