@@ -17,7 +17,7 @@ class GoogleMerchantAdapter
             xml.item do
               xml.id product['id']
               xml.title product['name']
-              xml.description product['description'] if product['description']
+              xml.description product['description'].encode("UTF-8") if product['description']
               xml.link product['url']
               xml["g"].id product['id']
               xml["g"].price "#{product['price']} BRL"
