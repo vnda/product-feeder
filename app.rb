@@ -14,7 +14,7 @@ class Feeder < Sinatra::Base
 
   get "/products.rss" do
     content_type 'text/xml'
-    host = request.host
+    host = request['X-store']
     brand = request.host[/\w+/]
     products = ProductFetcher.new(host, brand).fetch_all
     GoogleMerchantAdapter.new.create_xml(products, brand, host)
