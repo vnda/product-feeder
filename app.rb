@@ -19,10 +19,14 @@ class Feeder < Sinatra::Base
       brand = host[/\w+/]
       products = ProductFetcher.new(host, brand).fetch_all
       GoogleMerchantAdapter.new.create_xml(products, brand, host)
-    rescue StandardError => ex
+    rescue ShopCredentialsNotFound => ex
       content_type 'text/html'
       status 403
       ex.message
+    rescue => ex
+      content_type 'text/html'
+      status 500
+      ex.message + "\n" + ex.backtrace.join("\n")
     end
   end
 
