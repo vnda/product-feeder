@@ -16,7 +16,7 @@ class Feeder < Sinatra::Base
     begin
       content_type 'text/xml'
       host = request.env['HTTP_X_STORE']
-      store = host.matchstring.match(/[w\.]*(\w+).*/)[1]
+      store = host.match(/[w\.]*(\w+).*/)[1]
       products = ProductFetcher.new(host, store).fetch_all
       GoogleMerchantAdapter.new.create_xml(products, store, host)
     rescue ShopCredentialsNotFound => ex
