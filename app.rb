@@ -13,11 +13,15 @@ class Feeder < Sinatra::Base
   end
 
   get "/products.rss" do
-    content_type 'text/xml'
-    host = request['X-store']
-    brand = request.host[/\w+/]
-    products = ProductFetcher.new(host, brand).fetch_all
-    GoogleMerchantAdapter.new.create_xml(products, brand, host)
+    begin
+      content_type 'text/xml'
+      host = request['X-store']
+      brand = request.host[/\w+/]
+      products = ProductFetcher.new(host, brand).fetch_all
+      GoogleMerchantAdapter.new.create_xml(products, brand, host)
+    rescue StandardError => ex
+      ex.msg
+    end
   end
 
 end
