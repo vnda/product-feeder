@@ -20,7 +20,7 @@ class Feeder < Sinatra::Base
       products = ProductFetcher.new(host, brand).fetch_all
       GoogleMerchantAdapter.new.create_xml(products, brand, host)
     rescue StandardError => ex
-      ex.msg
+      ex.message
     end
   end
 
