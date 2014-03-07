@@ -18,7 +18,7 @@ class Feeder < Sinatra::Base
       host = request.env['HTTP_X_STORE']
       store = host.match(/[w\.]*(\w+).*/)[1]
       products = ProductFetcher.new(host, store).fetch_all
-      GoogleMerchantAdapter.new.create_xml(products, store, host)
+      GoogleMerchantAdapter.new.create_xml(products, store, host).encode("UTF-8")
     rescue ShopCredentialsNotFound => ex
       content_type 'text/html'
       status 403
