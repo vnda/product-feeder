@@ -21,6 +21,7 @@ class Feeder < Sinatra::Base
       GoogleMerchantAdapter.new.create_xml(products, brand, host)
     rescue StandardError => ex
       content_type 'text/html'
+      status 403
       ex.message
     end
   end
