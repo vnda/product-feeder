@@ -16,7 +16,7 @@ class Feeder < Sinatra::Base
     begin
       content_type 'text/xml'
       host = request['X-store']
-      brand = request.host[/\w+/]
+      brand = host[/\w+/]
       products = ProductFetcher.new(host, brand).fetch_all
       GoogleMerchantAdapter.new.create_xml(products, brand, host)
     rescue StandardError => ex
