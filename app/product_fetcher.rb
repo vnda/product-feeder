@@ -9,7 +9,7 @@ class ProductFetcher
   end
 
   def fetch_all
-    API.get(@host, "/v2/products", @credentials)
+    API.get(@host, "/v2/products?limit=5000", @credentials)
   end
 
 end
