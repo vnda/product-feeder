@@ -12,7 +12,6 @@ GEM
     json (1.8.1)
     mini_portile (0.5.2)
     multi_xml (0.5.5)
-    newrelic_rpm (3.7.2.195)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     puma (2.7.1)
@@ -42,7 +41,6 @@ DEPENDENCIES
   dotenv
   foreman
   httparty
-  newrelic_rpm
   nokogiri
   puma
   rspec
