@@ -24,7 +24,7 @@ class GoogleMerchantAdapter
               xml["g"].condition "new"
               xml["g"].image_link "http://#{product['image_url']}"
               xml["g"].availability product['available'] ? 'in stock' : 'out of stock'
-              xml["g"].brand category_tag(product, 'gm_brand')
+              xml["g"].brand category_tag(product, 'brand')
               xml["g"].category category_tag(product, 'gm_category')
               xml["g"].identifier_exists "FALSE"
               xml["g"].installment do
