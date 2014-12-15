@@ -24,7 +24,8 @@ class GoogleMerchantAdapter
               xml["g"].condition "new"
               xml["g"].image_link "http://#{product['image_url']}"
               xml["g"].availability product['available'] ? 'in stock' : 'out of stock'
-              xml["g"].brand brand
+              xml["g"].brand category_tag(product, 'gm_brand')
+              xml["g"].category category_tag(product, 'gm_category')
               xml["g"].identifier_exists "FALSE"
               xml["g"].installment do
                 xml["g"].months product['installments'].length
@@ -37,4 +38,13 @@ class GoogleMerchantAdapter
     end
     @builder.to_xml
   end
+
+  def category_tag(product, category)
+    category_tags = product['category_tags'] if product && product['category_tags'] != []
+    if category_tags
+      category_tag = category_tags.select {|c| c["tag_type"] == category }
+        return category_tag.first['name'] if category_tag
+    end
+  end
+
 end
