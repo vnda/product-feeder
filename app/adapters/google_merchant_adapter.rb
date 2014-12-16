@@ -43,7 +43,7 @@ class GoogleMerchantAdapter
     category_tags = product['category_tags'] if product && product['category_tags'] != []
     if category_tags
       category_tag = category_tags.select {|c| c["tag_type"] == category }
-        return category_tag.first['name'] if category_tag
+        return category_tag.first['name'] if category_tag.any?
     end
   end
 
