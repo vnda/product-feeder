@@ -21,7 +21,7 @@ class GoogleMerchantAdapter
               xml.link product['url']
               xml["g"].id product['id']
               xml["g"].price "#{product['price']} BRL"
-              xml["g"].sale_price "#{product['sale_price']} BRL" if product['sale_price'].present?
+              xml["g"].sale_price "#{product['sale_price']} BRL" if product['sale_price'] && product['sale_price'] != 0
               xml["g"].condition "new"
               xml["g"].image_link "http:#{product['image_url']}"
               xml["g"].availability product['available'] ? 'in stock' : 'out of stock'
