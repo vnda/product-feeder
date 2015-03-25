@@ -17,11 +17,11 @@ class GoogleMerchantAdapter
             xml.item do
               xml.id product['id']
               xml.title product['name']
-              xml.description product['description'].encode("UTF-8") if product['description']
+              xml.description clean_description(product['description'].encode("UTF-8")) if product['description']
               xml.link product['url']
               xml["g"].id product['id']
               xml["g"].price "#{product['price']} BRL"
-              xml["g"].sale_price "#{product['sale_price']} BRL"
+              xml["g"].sale_price "#{product['sale_price']} BRL" if product['sale_price'].present?
               xml["g"].condition "new"
               xml["g"].image_link "http:#{product['image_url']}"
               xml["g"].availability product['available'] ? 'in stock' : 'out of stock'
@@ -38,6 +38,11 @@ class GoogleMerchantAdapter
       end
     end
     @builder.to_xml
+  end
+
+  def clean_description(description)
+    item = Nokogiri::HTML(description)
+    item.xpath("//text()").text
   end
 
   def category_tag(product, category)
